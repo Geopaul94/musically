@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "994914626825",
+    "project_id": "musically-d0a36",
+    "storage_bucket": "musically-d0a36.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994914626825:android:1088ae09f40c67e1e3b7d8",
+        "android_client_info": {
+          "package_name": "com.example.musically"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq-8PNRQdI4SQigaA4Qac7du8tACQsHAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
