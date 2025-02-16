@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:musically/presentation/screeens/audio_upload_screen.dart';
-import 'package:musically/presentation/screeens/authentication/login_page.dart';
+import 'package:musically/presentation/bloc/authentication/signup/signup_bloc.dart';
+import 'package:musically/presentation/bloc/songs_fetch/songs_fetch_bloc.dart';
+import 'package:musically/presentation/bloc/songsupload/songupload_bloc.dart';
+
 import 'package:musically/presentation/screeens/authentication/providers/providers.dart';
-import 'package:musically/presentation/screeens/authentication/signup_page.dart';
-import 'package:musically/presentation/screeens/homepage.dart';
-import 'package:musically/presentation/screeens/songs_upload_screen.dart';
 
 import 'package:musically/presentation/screeens/splash_screen.dart';
 
@@ -38,21 +38,18 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-
-
-
+ Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(392, 802), 
+      designSize: const Size(392, 802),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          title: 'Musically',
-          theme: Provider.of<ThemeProvider>(context).themeData,
-          home:SplashScreen(),
-          debugShowCheckedModeBanner: false,
-        );
+        return  MaterialApp(
+            title: 'Musically',
+            theme: Provider.of<ThemeProvider>(context).themeData,
+            home: const SplashScreen(),
+            debugShowCheckedModeBanner: false,
+          );
       },
     );
   }

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:musically/data/models/songs/song.dart';
+import 'package:musically/data/models/songs/song_model.dart';
 import 'package:musically/data/repository/song_upload.dart';
 
 part 'songupload_event.dart';

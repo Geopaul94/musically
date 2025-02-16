@@ -1,7 +1,4 @@
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:musically/presentation/screeens/homepage.dart';
-import 'package:musically/presentation/widgets/shimmer_loading.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:flutter/cupertino.dart';
@@ -10,33 +7,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-import 'package:musically/presentation/bloc/authentication/signup/signup_bloc.dart';
 import 'package:musically/presentation/bloc/songsupload/songupload_bloc.dart';
-import 'package:musically/presentation/screeens/authentication/signup_page.dart';
-import 'package:musically/presentation/screeens/jumping_icon.dart';
-import 'package:musically/presentation/widgets/CustomElevatedButton.dart';
 import 'package:musically/presentation/widgets/custom_elevated_button.dart';
 import 'package:musically/presentation/widgets/custome_snackbar.dart';
 import 'package:musically/presentation/widgets/custometextformfield.dart';
-import 'package:musically/presentation/widgets/validations%20copy.dart';
 import 'package:musically/utilities/constants/constants.dart';
 import 'package:musically/utilities/functions/image_picker.dart';
 import 'package:musically/utilities/functions/pickaudiofile.dart';
-import 'package:musically/utilities/functions/random_image.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
-import '../../data/models/songs/song.dart';
-import 'package:intl/intl.dart';
+import '../../data/models/songs/song_model.dart';
 
 import '../../data/repository/song_upload.dart';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:musically/data/repository/song_upload.dart';
-import 'dart:convert';
-import 'package:path/path.dart' as path;
 
 class SongsUploadScreen extends StatefulWidget {
   const SongsUploadScreen({super.key});
@@ -240,8 +222,7 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
                 BlocBuilder<SonguploadBloc, SonguploadState>(
                   builder: (context, state) {
                     if (state is SonguploadLoadingState) {
-                      return Container(
-                     child:  CircularProgressIndicator());
+                      return Container(child: CircularProgressIndicator());
                     }
 
                     return CustomGradientButton(
@@ -293,7 +274,6 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
                           return;
                         }
 
-                      
                         if (imagePath == null) {
                           customSnackbar(
                             context,
@@ -309,8 +289,16 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
                           context.read<SonguploadBloc>().add(
                                 UsersongsUploadEvent(
                                   songs: SongsModel(
-                                    songname: _songNameController.text,
-                                    artistname: _artistNameController.text,
+                                    songname: _songNameController.text[0]
+                                            .toUpperCase() +
+                                        _songNameController.text
+                                            .substring(1)
+                                            .toLowerCase(),
+                                    artistname: _artistNameController.text[0]
+                                            .toUpperCase() +
+                                        _artistNameController.text
+                                            .substring(1)
+                                            .toLowerCase(),
                                     audiopath:
                                         _audioUrlController.text.isNotEmpty
                                             ? _audioUrlController.text

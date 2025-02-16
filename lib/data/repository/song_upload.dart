@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
-import 'package:musically/data/models/songs/song.dart';
+import 'package:musically/data/models/songs/song_model.dart';
 import 'package:musically/main.dart';
 
 // class SongsUpload {

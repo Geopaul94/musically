@@ -70,38 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        //    const CustomText(text: "Email"),
-
-                        // CustomTextFormField(
-                        //   labelText: "Email",
-                        //   icon: CupertinoIcons.mail,
-                        //   controller: _emailController,
-                        //   validator: validateEmail,
-                        // ),
-
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
-
-                        // const CustomText(
-                        //   text: "Password",
-                        //   fontWeight: FontWeight.bold,
-                        // ),
-                        // CustomTextFormField(
-                        //   labelText: "Password",
-                        //   icon: CupertinoIcons.lock,
-                        //   controller: _passwordController,
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Please enter your password';
-                        //     }
-                        //     if (value.length < 6) {
-                        //       return 'Password must be at least 6 characters long';
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
-
+                        
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

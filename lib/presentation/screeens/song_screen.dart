@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:musically/data/models/songs/song_model.dart';
 import 'package:musically/data/models/songs/song_provider.dart';
 import 'package:musically/presentation/screeens/songdesign/neu_box.dart';
 import 'package:musically/presentation/screeens/songs_upload_screen.dart';
@@ -9,7 +10,8 @@ import 'package:musically/utilities/constants/constants.dart';
 import 'package:provider/provider.dart';
 
 class SongScreen extends StatelessWidget {
-  const SongScreen({super.key});
+
+  const SongScreen({super.key, });
 
   String formattime(Duration duration) {
     String twodigitSeconds =
