@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppColors {
   static const Color primaryColor = Color(0xFF6200EE); // Purple
@@ -89,89 +90,42 @@ const userNamekey = 'userName';
 const userProfilePickey = 'userProfilePic';
 
 
+// Text Styles
+TextStyle profileStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 18.sp);
+TextStyle profileStyle2 = TextStyle(fontWeight: FontWeight.w500, fontSize: 15.sp);
 
+// SizedBoxes for heights (using .h for responsive height)
+SizedBox h5 = SizedBox(height: 5.h);
+SizedBox h10 = SizedBox(height: 10.h);
+SizedBox h15 = SizedBox(height: 15.h);
+SizedBox h16 = SizedBox(height: 16.h);
+SizedBox h20 = SizedBox(height: 20.h);
+SizedBox h30 = SizedBox(height: 30.h);
+SizedBox h40 = SizedBox(height: 40.h);
+SizedBox h50 = SizedBox(height: 50.h);
+SizedBox h80 = SizedBox(height: 80.h);
+SizedBox h100 = SizedBox(height: 100.h);
 
-const profilestyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
+// SizedBoxes for widths (using .w for responsive width)
+SizedBox w10 = SizedBox(width: 10.w);
+SizedBox w20 = SizedBox(width: 20.w);
+SizedBox w30 = SizedBox(width: 30.w);
+SizedBox w40 = SizedBox(width: 40.w);
+SizedBox kwidth = SizedBox(width: 10.w);
 
-const profilestyle2 = TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
-
-
-
-
-
-const h5 = SizedBox(height: 5);
-
-const h10 = SizedBox(height: 10);
-
-const h20 = SizedBox(height: 20);
-
-const h30 = SizedBox(height: 30);
-
-const h40 = SizedBox(height: 40);
-
-const h16 = SizedBox(height: 16.0);
-
-
-
-const h15 = SizedBox(height: 15);
-
-const h50 = SizedBox(height: 50);
-
-const h80 = SizedBox(height: 80);
-
-const h100 = SizedBox(height: 100);
-
-
-// SizedBox for widths
-
-const w10 = SizedBox(width: 10);
-
-const w20 = SizedBox(width: 20);
-
-const w30 = SizedBox(width: 30);
-
-const w40 = SizedBox(width: 40);
-
-const kwidth = SizedBox(width: 10);
-
-const appBarTitleStyle = TextStyle(
-  fontSize: 22,
+// Other Styles
+TextStyle appBarTitleStyle = TextStyle(
+  fontSize: 22.sp,
   fontWeight: FontWeight.w500,
 );
-const profilecolumnStyle = TextStyle(
-  fontSize: 18,
+
+TextStyle profileColumnStyle = TextStyle(
+  fontSize: 18.sp,
   fontWeight: FontWeight.w800,
 );
 
-
-
-
-const coloredBold24 =
-    TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor);
-const greyMeduim = TextStyle(
-  fontSize: 16,
-  color: grey,
-);
-const showdialogueHeadingstyle = TextStyle(
-  fontWeight: FontWeight.bold,
-  fontSize: 20,
-);
-const showdialogueContentStyle = TextStyle(
-  fontSize: 16,
-);
-
-const showDialogueButtonStyle = TextStyle(
-  color: red,
-  fontSize: 16,
-);
-const showDialogueButtonStyle2 = TextStyle(
-  color: green,
-  fontSize: 16,
-);
-
-
-// border radiusfinal
-BorderRadius kradius10 = BorderRadius.circular(10);
-BorderRadius kradius30 = BorderRadius.circular(30);
-BorderRadius kradius20 = BorderRadius.circular(20.0);
+// Border Radii (using .r for responsive radius)
+BorderRadius kradius10 = BorderRadius.circular(10.r);
+BorderRadius kradius20 = BorderRadius.circular(20.r);
+BorderRadius kradius30 = BorderRadius.circular(30.r);
 BorderRadius kradius100 = BorderRadius.circular(100);

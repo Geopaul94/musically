@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:musically/data/repository/authentication/auth_service.dart';
-import 'package:musically/presentation/bloc/signup/login/login_event.dart';
-import 'package:musically/presentation/bloc/signup/login/login_state.dart';
+import 'package:musically/presentation/bloc/authentication/login/login_event.dart';
+import 'package:musically/presentation/bloc/authentication/login/login_state.dart';
 
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<UserLoginEvent>(_onLoginSubmitted);
-    on<UserGoogleLoginEvent>(_onGoogleLoginSubmitted); 
+    on<UserGoogleLoginEvent>(_onGoogleLoginSubmitted);   on<UserLogoutvent>(_onUserLogoutventSubmitted); 
   }
 
   Future<void> _onLoginSubmitted(UserLoginEvent event, Emitter<LoginState> emit) async {
@@ -31,3 +31,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 }
+
+ Future<void> _onUserLogoutventSubmitted(UserLogoutvent event, Emitter<LoginState> emit) async {
+    emit(LogoutLoadingState());
+    try {
+      // Assume `AuthService` has a method for Google sign-in
+      await AuthService().signOut(); 
+      emit(LogoutSuccessState());
+    } catch (e) {
+      emit(LogoutErrorState(error: e.toString())); // Capture and pass error
+    }
+  }
+

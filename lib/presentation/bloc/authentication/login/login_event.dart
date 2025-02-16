@@ -14,3 +14,9 @@ class UserGoogleLoginEvent extends LoginEvent {
 
 
 }
+
+
+class UserLogoutvent extends LoginEvent {
+
+
+}

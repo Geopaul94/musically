@@ -6,44 +6,6 @@ import 'package:musically/data/models/user_data_model.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-// class AuthService {
-//   final FirebaseAuth auth = FirebaseAuth.instance;
-
-//   Future<UserCredential> signup(UserModel user) async {
-//     try {
-//       // Create a new user with email and password
-//       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-//         email: user.email,
-//         password: user.password,
-//       );
-
-//       // Add user information to Firestore
-//       await FirebaseFirestore.instance
-//           .collection('users')
-//           .doc(userCredential.user!.uid)
-//           .set({
-//         'username': user.username,
-//         'email': user.email,
-//         'phoneNumber': user.phonenumber,
-//         'uid': userCredential.user!.uid,
-//       });
-
-//       return userCredential;
-//     } on FirebaseAuthException catch (e) {
-//       // Handle specific Firebase exceptions
-//       if (e.code == 'weak-password') {
-//         throw Exception('The password provided is too weak.');
-//       } else if (e.code == 'email-already-in-use') {
-//         throw Exception('The account already exists for that email.');
-//       } else {
-//         throw Exception('An error occurred: ${e.message}');
-//       }
-//     } catch (e) {
-//       // Handle any other exceptions
-//       throw Exception('An error occurred: $e');
-//     }
-//     }
-
 
 
 class AuthService {
@@ -53,13 +15,17 @@ class AuthService {
   Future<UserCredential> signup(UserModel usersdata) async {
     try {
       // Create a new user with email and password
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: usersdata.email,
         password: usersdata.password,
       );
 
       // Add user information to Firestore
-      await _firestore.collection('users').doc(userCredential.user!.uid).set(usersdata.toFirestore());
+      await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set(usersdata.toFirestore());
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -78,55 +44,73 @@ class AuthService {
     }
   }
 
+  // Future<UserCredential?> loginWithEmailAndPassword(
+  //     String email, String password) async {
+  //   try {
+  //     final UserCredential userCredential =
+  //         await _auth.signInWithEmailAndPassword(
+  //       email: email,
+  //       password: password,
+  //     );
+  //     return userCredential;
+  //   } on FirebaseAuthException catch (e) {
+  //     // Handle errors
+  //     if (e.code == 'weak-password') {
+  //       throw Exception('The password provided is too weak.');
+  //     } else if (e.code == 'email-already-in-use') {
+  //       throw Exception('The account already exists for that email.');
+  //     } else {
+  //       throw Exception('An error occurred: ${e.message}');
+  //     }
+  //   } catch (e) {
+  //     throw Exception('An error occurred: $e.to');
+  //   }
+  // }
 
 
-  Future<UserCredential?> loginWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return userCredential;
-    } on FirebaseAuthException catch (e) {
-      // Handle errors
-      if (e.code == 'weak-password') {
-        throw Exception('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        throw Exception('The account already exists for that email.');
-      } else {
-        throw Exception('An error occurred: ${e.message}');
-      }
-    } catch (e) {
-      throw Exception('An error occurred: $e');
+Future<UserCredential?> loginWithEmailAndPassword(
+    String email, String password) async {
+  try {
+    final UserCredential userCredential =
+        await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return userCredential;
+  } on FirebaseAuthException catch (e) {
+    // Handle specific Firebase errors
+    switch (e.code) {
+      case 'user-not-found':
+        throw Exception('No user found for that email. Please check your email.');
+      case 'wrong-password':
+        throw Exception('Incorrect password. Please check your password.');
+      case 'invalid-email':
+        throw Exception('The email address is not valid. Please check your email.');
+      case 'user-disabled':
+        throw Exception('This user has been disabled. Please contact support.');
+      default:
+        throw Exception('An error occurred. Please try again later.');
     }
+  } catch (e) {
+    throw Exception('An unexpected error occurred: $e');
   }
+}
 
 
 
-
-
-
-
-
-  Future<void> signOut(BuildContext context) async {
+  Future<void> signOut() async {
     try {
       await _auth.signOut();
 
-       SharedPreferences prefs = await SharedPreferences.getInstance();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setBool('isLoggedIn', false);
+      prefs.setBool('isLoggedIn', false);
 
       // Optionally, you can show a message to the user
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Successfully signed out')),
-      );
+    
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error signing out: $e')),
-      );
+            throw Exception('Error signing out: $e');
     }
   }
 

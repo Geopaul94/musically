@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:musically/presentation/bloc/signup/login/login_bloc.dart';
-import 'package:musically/presentation/bloc/signup/login/login_event.dart';
-import 'package:musically/presentation/bloc/signup/login/login_state.dart';
+import 'package:musically/presentation/bloc/authentication/login/login_bloc.dart';
+import 'package:musically/presentation/bloc/authentication/login/login_event.dart';
+import 'package:musically/presentation/bloc/authentication/login/login_state.dart';
 import 'package:musically/presentation/screeens/authentication/signup_page.dart';
 import 'package:musically/presentation/screeens/homepage.dart';
+import 'package:musically/presentation/screeens/jumping_icon.dart';
+import 'package:musically/presentation/screeens/songs_upload_screen.dart';
 
 import 'package:musically/presentation/widgets/custom_elevated_button.dart';
 import 'package:musically/presentation/widgets/custom_text.dart';
@@ -63,38 +65,74 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   
+                    h100,
+                    h50,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CustomText(text: "Email"),
+                        //    const CustomText(text: "Email"),
+
+                        // CustomTextFormField(
+                        //   labelText: "Email",
+                        //   icon: CupertinoIcons.mail,
+                        //   controller: _emailController,
+                        //   validator: validateEmail,
+                        // ),
+
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+
+                        // const CustomText(
+                        //   text: "Password",
+                        //   fontWeight: FontWeight.bold,
+                        // ),
+                        // CustomTextFormField(
+                        //   labelText: "Password",
+                        //   icon: CupertinoIcons.lock,
+                        //   controller: _passwordController,
+                        //   validator: (value) {
+                        //     if (value == null || value.isEmpty) {
+                        //       return 'Please enter your password';
+                        //     }
+                        //     if (value.length < 6) {
+                        //       return 'Password must be at least 6 characters long';
+                        //     }
+                        //     return null;
+                        //   },
+                        // ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            JumpingIcon(
+                              iconsdata: Icon(
+                                Icons.music_note,
+                                size: 60,
+                              ),
+                            ),
+                          ],
+                        ),
+                        h50,
+
                         CustomTextFormField(
-                          labelText: "Email",
-                          icon: CupertinoIcons.mail,
+                          labelText: 'Email',
+                          hintText: 'Enter your email address',
+                          icon: Icons.email_outlined,
                           controller: _emailController,
                           validator: validateEmail,
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const CustomText(
-                          text: "Password",
-                          fontWeight: FontWeight.bold,
-                        ),
+                        h20,
+
                         CustomTextFormField(
-                          labelText: "Password",
-                          icon: CupertinoIcons.lock,
+                          labelText: 'Password',
+                          hintText: 'Enter your password',
+                          icon: Icons.lock,
                           controller: _passwordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                            if (value.length < 6) {
-                              return 'Password must be at least 6 characters long';
-                            }
-                            return null;
-                          },
+                          obscureText: true,
+                          validator: validatePassword,
                         ),
+                        h20,
                       ],
                     ),
                     h20,
@@ -131,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/g_logo.png',
+                                'assets/images/g_logo.png',
                                 width: 0.12.sw,
                                 height: 0.07.sh,
                                 fit: BoxFit.cover,
@@ -143,7 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           onTap: () async {
-                            context.read<LoginBloc>().add(UserGoogleLoginEvent());
+                            context
+                                .read<LoginBloc>()
+                                .add(UserGoogleLoginEvent());
 
                             print("google button pressed");
                           },
@@ -158,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const CustomText(
                           text: "Don't have an account? ",
                           fontSize: 12,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.normal,
                         ),
                         const SizedBox(width: 5),
