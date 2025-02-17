@@ -7,6 +7,7 @@ import 'package:musically/presentation/screeens/songdesign/neu_box.dart';
 import 'package:musically/presentation/screeens/songs_upload_screen.dart';
 import 'package:musically/presentation/widgets/custom_text.dart';
 import 'package:musically/utilities/constants/constants.dart';
+
 class SongScreens extends StatefulWidget {
   final List<SongsModel> songs;
   final int currentIndex;
@@ -78,9 +79,38 @@ class _SongScreensState extends State<SongScreens> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25, top: 10),
+          padding:
+              const EdgeInsets.only(left: 25, right: 25, bottom: 25, top: 10),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             // Song cover, title, and artist
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(CupertinoIcons.back),
+                ),
+                Text(
+                  'P L A Y L I S T',
+                  style:
+                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SongsUploadScreen(),
+                        ));
+                  },
+                  icon: Icon(CupertinoIcons.music_albums),
+                ),
+              ],
+            ),
+
             SizedBox(
               height: 490.h,
               child: NeuBox(
@@ -95,7 +125,8 @@ class _SongScreensState extends State<SongScreens> {
                           widget.songs[currentSongIndex].imagepath,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
-                            return Icon(Icons.broken_image, size: 100, color: Colors.grey);
+                            return Icon(Icons.broken_image,
+                                size: 100, color: Colors.grey);
                           },
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
@@ -105,6 +136,9 @@ class _SongScreensState extends State<SongScreens> {
                       ),
                     ),
                     // Song title and artist name
+
+                    h30,
+
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Row(
@@ -120,7 +154,8 @@ class _SongScreensState extends State<SongScreens> {
                                 color: Colors.white,
                               ),
                               CustomText(
-                                  text: widget.songs[currentSongIndex].artistname,
+                                  text:
+                                      widget.songs[currentSongIndex].artistname,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.sp,
                                   color: Colors.grey),
@@ -134,21 +169,46 @@ class _SongScreensState extends State<SongScreens> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
 
-            // Slider and duration
-            Slider(
-              value: sliderValue,
-              activeColor: Colors.blueAccent,
-              onChanged: (value) {
-                setState(() {
-                  sliderValue = value;
-                  // Add seek functionality
-                  myAudio.audioPlayer.seek(Duration(seconds: value.toInt()));
-                });
-              },
-              min: 0,
-              max: myAudio.totalDuration?.inSeconds.toDouble() ?? 1,
+            h15,
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomText(
+                  text: '0.00',
+                  color: white,
+                ),
+                Icon(Icons.shuffle),
+                Icon(Icons.repeat),
+                CustomText(
+                  text: '4.00',
+                  color: white,
+                ),
+              ],
+            ),
+
+            h5, // Slider and duration
+            SliderTheme(
+              data: SliderThemeData(
+                  trackHeight: 5,
+                  thumbShape: RoundSliderThumbShape(
+                    enabledThumbRadius: 5,
+                  )),
+              child: Slider(
+                value: sliderValue,
+                activeColor: Colors.blueAccent,
+                inactiveColor: grey,
+                onChanged: (value) {
+                  setState(() {
+                    sliderValue = value;
+                    // Add seek functionality
+                    myAudio.audioPlayer.seek(Duration(seconds: value.toInt()));
+                  });
+                },
+                min: 0,
+                max: myAudio.totalDuration?.inSeconds.toDouble() ?? 1,
+              ),
             ),
 
             // Song controls (previous, play/pause, next)

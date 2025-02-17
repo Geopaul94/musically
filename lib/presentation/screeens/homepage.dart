@@ -87,7 +87,7 @@ class _HomepageState extends State<Homepage> {
               },
               builder: (context, state) {
                 if (state is FetchSongsLoadingState) {
-                  return CircularProgressIndicator();
+                  return Container(height: 600,width: 800,   child: ShimmerLoading());
                 } else if (state is FetchSongsSuccessState) {
                   final songs = state.songs;
 

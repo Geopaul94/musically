@@ -4,26 +4,31 @@ import 'package:musically/utilities/constants/constants.dart';
 import 'package:musically/utilities/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-class NeuBox extends StatelessWidget {
+class NeuBox extends StatefulWidget {
   final Widget? child;
 
   const NeuBox({super.key, this.child});
 
   @override
+  State<NeuBox> createState() => _NeuBoxState();
+}
+
+class _NeuBoxState extends State<NeuBox> {
+  @override
   Widget build(BuildContext context) {
-    bool isDarkmode =Provider .of<ThemeProvider>(context).isDarkMode;
+    bool isDarkmode = Provider.of<ThemeProvider>(context).isDarkMode;
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(
-            color: isDarkmode ? black  :  Colors.grey.shade500,
+            color: isDarkmode ? black : Colors.grey.shade500,
             blurRadius: 15.0,
             offset: Offset(4, 4),
           ),
           BoxShadow(
-            color:isDarkmode ?  Colors.grey.shade800  :  white,
+            color: isDarkmode ? Colors.grey.shade800 : white,
             blurRadius: 15.0,
             offset: Offset(-4, -4),
           ),
@@ -31,7 +36,7 @@ class NeuBox extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(12),
-        child: child,
+        child: widget.child,
       ),
     );
   }

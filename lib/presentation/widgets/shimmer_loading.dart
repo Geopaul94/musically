@@ -10,8 +10,8 @@ class ShimmerLoading extends StatefulWidget {
 }
 
 class _ShimmerLoadingState extends State<ShimmerLoading> {
-  Color _baseColor = const Color.fromARGB(255, 180, 178, 178);
-  Color _highlightColor = const Color.fromARGB(255, 194, 189, 189);
+  Color _baseColor = const Color.fromARGB(97, 121, 115, 115);
+  Color _highlightColor = const Color.fromARGB(148, 126, 124, 124);
   Timer? _timer;
 
   @override
