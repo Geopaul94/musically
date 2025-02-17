@@ -7,29 +7,25 @@ import 'package:musically/data/models/songs/song_model.dart';
 import 'package:musically/presentation/bloc/fetchsongs/fetchsongs_bloc.dart';
 import 'package:musically/presentation/bloc/fetchsongs/fetchsongs_event.dart';
 import 'package:musically/presentation/bloc/fetchsongs/fetchsongs_state.dart';
-import 'package:musically/presentation/screeens/authentication/login_page.dart';
-
-import 'package:musically/presentation/screeens/drawer_homescreen.dart';
-import 'package:musically/presentation/screeens/favaourite_songs.dart';
 import 'package:musically/presentation/screeens/jumping_icon.dart';
 import 'package:musically/presentation/screeens/song_screens.dart';
 import 'package:musically/presentation/screeens/songs_upload_screen.dart';
-import 'package:musically/presentation/widgets/CustomElevatedButton.dart';
 import 'package:musically/presentation/widgets/custom_text.dart';
 import 'package:musically/presentation/widgets/custome_snackbar.dart';
-import 'package:musically/presentation/widgets/shimmer_loading.dart';
 import 'package:musically/utilities/constants/constants.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+class FavaouriteSongs extends StatefulWidget {
+  const FavaouriteSongs({super.key});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<FavaouriteSongs> createState() => _FavaouriteSongsState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _FavaouriteSongsState extends State<FavaouriteSongs> {
   String? currentUserId;
 
+  List<SongsModel> songs = [];
+  int currentIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -55,22 +51,21 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: const Text("P L A Y L I S T"),
-        actions: [
+        title: const Text("F A V A O U R I T S"),
+actions: [
           IconButton(
             icon: Icon(Icons.favorite),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FavaouriteSongs(),
+                  builder: (context) =>
+                      SongScreens(songs: songs, currentIndex: currentIndex),
                 ),
               );
             },
           ),
-        ],
-      ),
-      drawer: DrawerHomescreen(),
+        ],   ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

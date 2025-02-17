@@ -11,38 +11,50 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+Future<UserCredential> signup(UserModel usersdata) async {
+  try {
+    // Create a new user with email and password
+    UserCredential userCredential =
+        await _auth.createUserWithEmailAndPassword(
+      email: usersdata.email,
+      password: usersdata.password,
+    );
 
-  Future<UserCredential> signup(UserModel usersdata) async {
-    try {
-      // Create a new user with email and password
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: usersdata.email,
-        password: usersdata.password,
-      );
+    // Get the generated userId from Firebase Authentication
+    String userId = userCredential.user!.uid;
 
-      // Add user information to Firestore
-      await _firestore
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set(usersdata.toFirestore());
+    // Create a new UserModel instance with the userId
+    UserModel userDataWithId = UserModel(
+      userId: userId,  // Assign the userId here
+      username: usersdata.username,
+      email: usersdata.email,
+      password: usersdata.password,
+      phonenumber: usersdata.phonenumber,
+    );
 
-      return userCredential;
-    } on FirebaseAuthException catch (e) {
-      // Handle specific Firebase exceptions
-      switch (e.code) {
-        case 'weak-password':
-          throw Exception('The password provided is too weak.');
-        case 'email-already-in-use':
-          throw Exception('The account already exists for that email.');
-        default:
-          throw Exception('An error occurred: ${e.message}');
-      }
-    } catch (e) {
-      // Handle any other exceptions
-      throw Exception('An error occurred: $e');
+    // Add user information to Firestore
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .set(userDataWithId.toFirestore());
+
+    return userCredential;
+  } on FirebaseAuthException catch (e) {
+    // Handle specific Firebase exceptions
+    switch (e.code) {
+      case 'weak-password':
+        throw Exception('The password provided is too weak.');
+      case 'email-already-in-use':
+        throw Exception('The account already exists for that email.');
+      default:
+        throw Exception('An error occurred: ${e.message}');
     }
+  } catch (e) {
+    // Handle any other exceptions
+    throw Exception('An error occurred: $e');
   }
+}
+
 
   // Future<UserCredential?> loginWithEmailAndPassword(
   //     String email, String password) async {

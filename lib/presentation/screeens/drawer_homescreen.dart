@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musically/data/repository/authentication/auth_service.dart';
 import 'package:musically/presentation/screeens/authentication/login_page.dart';
+import 'package:musically/presentation/screeens/songs_upload_screen.dart';
 import 'package:musically/utilities/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,9 @@ class DrawerHomescreen extends StatelessWidget {
             child: ListTile(
               title: Text('H O M E'),
               leading: Icon(Icons.home), // Use Icon widget for leading
-              onTap: () {},
+              onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder:(context) => SongsUploadScreen(),));
+              },
             ),
           ),
           Padding(

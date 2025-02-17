@@ -2,16 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:musically/data/models/songs/song_model.dart';
-import 'package:musically/data/models/songs/song_provider.dart';
+
+import 'package:musically/presentation/screeens/authentication/providers/playlist_provider.dart';
 import 'package:musically/presentation/screeens/songdesign/neu_box.dart';
 import 'package:musically/presentation/screeens/songs_upload_screen.dart';
 import 'package:musically/utilities/constants/constants.dart';
 import 'package:provider/provider.dart';
 
 class SongScreen extends StatelessWidget {
-
-  const SongScreen({super.key, });
+  const SongScreen({
+    super.key,
+  });
 
   String formattime(Duration duration) {
     String twodigitSeconds =
@@ -22,16 +23,7 @@ class SongScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Playlistprovider>(
-      builder: (context, value, child) {
-// get playlist
-
-        final playlist = value.playlist;
-
-//get current song index
-        final currentsong = playlist[value.currentsongIndex ?? 0];
-
-        return Scaffold(
+    return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           body: SafeArea(
             child: Padding(
@@ -74,19 +66,21 @@ class SongScreen extends StatelessWidget {
 
                   //album artwork
 
-                  Container(
+                  SizedBox(
                     height: 470.h,
                     child: NeuBox(
                       child: Column(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.r),
-                            child: Container(
+                            child: 
+                            
+                            Container(
                                 height: 360,
                                 width: double.infinity,
                                 child: Image.asset(
-                                  currentsong.songimage,
-                                  fit: BoxFit.cover,
+                                "assets/5.jpg",
+                                 fit: BoxFit.cover,
                                 )),
                           ),
                           Padding(
@@ -98,12 +92,12 @@ class SongScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      currentsong.songname,
+                                      "currentsong",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20.sp),
                                     ),
-                                    Text(currentsong.artistname),
+                                    Text("currentsong"),
                                   ],
                                 ),
                                 Icon(
@@ -114,7 +108,7 @@ class SongScreen extends StatelessWidget {
                             ),
                           )
                         ],
-                      ), // Correct this path if necessary
+                      ), 
                     ),
                   ),
                   //song duration progress
@@ -128,7 +122,7 @@ class SongScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             //start time
-                            Text(formattime(value.currentDuration)),
+                          //  Text(formattime(value.currentDuration)),
                             //shuffle icon
                             Icon(Icons.shuffle),
                             //repeat icon
@@ -136,25 +130,25 @@ class SongScreen extends StatelessWidget {
                             Icon(Icons.repeat),
 
                             //end time
-                            Text(formattime(value.totalDuration)),
+                        //    Text(formattime(value.totalDuration)),
                           ],
                         ),
                       ),
-                      SliderTheme(
-                        data: SliderTheme.of(context).copyWith(
-                            thumbShape:
-                                RoundSliderThumbShape(disabledThumbRadius: 0)),
-                        child: Slider(
-                          min: 0,
-                          max: value.totalDuration.inSeconds.toDouble(),
-                          activeColor: blueAccent,
-                          value: value.currentDuration.inSeconds.toDouble(),
-                          onChanged: (double double) {},
-                          onChangeEnd: (double double) {
-                            value.seek(Duration(seconds: double.toInt()));
-                          },
-                        ),
-                      )
+                      // SliderTheme(
+                      //   data: SliderTheme.of(context).copyWith(
+                      //       thumbShape:
+                      //           RoundSliderThumbShape(disabledThumbRadius: 0)),
+                      //   child: Slider(
+                      //     min: 0,
+                      //     max: value.totalDuration.inSeconds.toDouble(),
+                      //     activeColor: blueAccent,
+                      //     value: value.currentDuration.inSeconds.toDouble(),
+                      //     onChanged: (double double) {},
+                      //     onChangeEnd: (double double) {
+                      //       value.seek(Duration(seconds: double.toInt()));
+                      //     },
+                      //   ),
+                      // )
                     ],
                   )
 
@@ -168,7 +162,7 @@ class SongScreen extends StatelessWidget {
                       Expanded(
                           child: GestureDetector(
                               onTap: () {
-                                value.playPreviousSong();
+                     //           value.playPreviousSong();
                               },
                               child: NeuBox(
                                 child: Icon(Icons.skip_previous),
@@ -179,17 +173,17 @@ class SongScreen extends StatelessWidget {
                           flex: 2,
                           child: GestureDetector(
                               onTap: () {
-                                value.pauseOrResume();
+                   //             value.pauseOrResume();
                               },
-                              child: NeuBox(
-                                child: Icon(value.isPlaying
-                                    ? Icons.pause
-                                    : Icons.play_arrow),
-                              ))),
+                              // child: NeuBox(
+                              //   child: Icon(value.isPlaying
+                              //       ? Icons.pause
+                              //       : Icons.play_arrow),
+                            )),
                       w20,
                       Expanded(
                           child: GestureDetector(
-                              onTap: value.playNextSong,
+                          //    onTap: value.playNextSong,
                               child: NeuBox(
                                 child: Icon(Icons.skip_next),
                               )))
@@ -197,14 +191,17 @@ class SongScreen extends StatelessWidget {
                       //play pause
 
                       //skip forward
-                    ],
-                  )
+                      
+                 ] )
                 ],
               ),
             ),
           ),
         );
-      },
-    );
+      }
+  
   }
-}
+
+
+
+

@@ -5,8 +5,10 @@ class UserModel {
   final String email;
   final String password;
   final String phonenumber;
+  final String? userId;
 
   UserModel({
+    this.userId,
     required this.username,
     required this.email,
     required this.password,
@@ -17,6 +19,7 @@ class UserModel {
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return UserModel(
+      userId: doc.id, // Extract userId from document ID
       username: data['username'] as String,
       email: data['email'] as String,
       password: data['password'] as String,
@@ -27,30 +30,11 @@ class UserModel {
   // Convert a UserModel instance to a Firestore document map
   Map<String, dynamic> toFirestore() {
     return {
+      'userId': userId, // Include userId in Firestore map if needed
       'username': username,
       'email': email,
       'password': password,
       'phonenumber': phonenumber,
     };
-  }
-
-  // You can add helper methods if needed
-  UserModel copyWith({
-    String? username,
-    String? email,
-    String? password,
-    String? phonenumber,
-  }) {
-    return UserModel(
-      username: username ?? this.username,
-      email: email ?? this.email,
-      password: password ?? this.password,
-      phonenumber: phonenumber ?? this.phonenumber,
-    );
-  }
-
-  @override
-  String toString() {
-    return 'UserModel(username: $username, email: $email, password: $password, phonenumber: $phonenumber)';
   }
 }

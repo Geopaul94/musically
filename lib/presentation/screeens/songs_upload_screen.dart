@@ -1,3 +1,4 @@
+import 'package:musically/presentation/screeens/authentication/login_page.dart';
 import 'package:musically/presentation/screeens/homepage.dart';
 import 'package:path/path.dart' as path;
 
@@ -54,7 +55,12 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
         ),
         body: BlocListener<SonguploadBloc, SonguploadState>(
           listener: (context, state) {
-            if (state is SonguploadSuccessState) {
+            if (state is SonguploadSuccessState) { // Clear the fields after successful upload
+              _songNameController.clear();
+              _artistNameController.clear();
+              _audioUrlController.clear();
+              audioPath = null;
+              imagePath = null;
               customSnackbar(context, 'Song Uploaded Successfully', green);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) {
@@ -119,16 +125,15 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                   // Image Picker
                     Consumer<ImagePickerService>(
                       builder: (context, imageService, child) {
                         return GestureDetector(
                           onTap: () async {
                             await imageService.pickImage(ImageSource.gallery);
-                            // setState(() {
-                            //   imagePath = imageService.image?.path;
-                            // });
-
-                            imagePath = imageService.image?.path;
+                            setState(() {
+                              imagePath = imageService.image?.path;
+                            });
                           },
                           child: Container(
                             width: 170.w,
@@ -166,16 +171,14 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
                         );
                       },
                     ),
-                    Consumer<AudioPickerService>(
+                     Consumer<AudioPickerService>(
                       builder: (context, audioService, child) {
                         return GestureDetector(
                           onTap: () async {
                             await audioService.pickAudioFile();
-                            // setState(() {
-                            //   audioPath = audioService.audioFilePath;
-                            // });
-
-                            audioPath = audioService.audioFilePath;
+                            setState(() {
+                              audioPath = audioService.audioFilePath;
+                            });
                           },
                           child: Container(
                             width: 170.w,
@@ -308,10 +311,6 @@ class _SongsUploadScreenState extends State<SongsUploadScreen> {
                                   ),
                                 ),
                               );
-                          // print("Song Name: ${_songNameController.text}");
-                          // print("Artist Name: ${_artistNameController.text}");
-                          // print("Audio Path: $audioPath");
-                          // print("Image Path: $imagePath");
                         }
                       },
                     );

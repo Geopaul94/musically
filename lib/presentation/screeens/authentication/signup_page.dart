@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:musically/data/models/user_data_model.dart';
+import 'package:musically/main.dart';
 import 'package:musically/presentation/bloc/authentication/signup/signup_bloc.dart';
 import 'package:musically/presentation/screeens/authentication/login_page.dart';
+import 'package:musically/presentation/screeens/homepage.dart';
 
 import 'package:musically/presentation/widgets/custom_elevated_button.dart';
 import 'package:musically/presentation/widgets/custometextformfield.dart';
@@ -228,10 +230,12 @@ class SignUpScreen extends StatelessWidget {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               UserModel model = UserModel(
-                                username: _UserNameController.text,
+                                  username: _UserNameController.text,
                                 email: _emailController.text,
                                 password: _passwordController.text,
                                 phonenumber: _phonenumberController.text,
+                                   
+
                               );
                               context
                                   .read<SignupBloc>()

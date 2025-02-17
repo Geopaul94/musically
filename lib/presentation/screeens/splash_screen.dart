@@ -8,6 +8,26 @@ import 'package:musically/presentation/screeens/authentication/login_page.dart';
 import 'package:musically/presentation/screeens/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+
+
+
+
+
+
+
+
+
+
+    String? getCurrentUserId() {
+  final user = FirebaseAuth.instance.currentUser;
+  return user?.uid;
+}
+
+
+final currentUserId =getCurrentUserId() ;
+
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
