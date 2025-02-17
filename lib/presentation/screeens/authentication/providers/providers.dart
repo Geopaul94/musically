@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:musically/main.dart';
 import 'package:musically/presentation/screeens/authentication/providers/playlist_provider.dart';
+import 'package:musically/presentation/screeens/sample/my_audio.dart';
 import 'package:musically/utilities/functions/image_picker.dart';
 import 'package:musically/utilities/functions/pickaudiofile.dart';
 import 'package:musically/utilities/themes/theme_provider.dart';
@@ -16,7 +17,7 @@ class Providers {
         ChangeNotifierProvider(create: (context) => ImagePickerService()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => AudioPickerService()),
- // ChangeNotifierProvider(create: (context) => PlaylistProvider()),
+  ChangeNotifierProvider(create: (context) => MyAudio()),
       ],
       child: child, 
     );

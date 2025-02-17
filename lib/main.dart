@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:musically/data/models/songs/song_model.dart';
 import 'package:musically/presentation/bloc/fetchsongs/fetchsongs_bloc.dart';
+import 'package:musically/presentation/bloc/playsongs/playsong_controll_bloc.dart';
 
 import 'package:musically/presentation/screeens/authentication/providers/providers.dart';
+import 'package:musically/presentation/screeens/home.dart';
 import 'package:musically/presentation/screeens/homepage.dart';
 
 import 'package:musically/utilities/themes/theme_provider.dart';
@@ -32,6 +35,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int initialIndex = 0; // Set the starting index for songs
+    List<SongsModel> songs = []; // Initialize the list of songs with your data
+
     return ScreenUtilInit(
       designSize: const Size(392, 802),
       minTextAdapt: true,
@@ -39,12 +45,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-          
-           BlocProvider<FetchSongsBloc>(
-          create: (context) => FetchSongsBloc(),
-        ),
+            BlocProvider<FetchSongsBloc>(
+              create: (context) => FetchSongsBloc(),
+            ),
+            // Provider<MusicPlayerBloc>(
+            //     create: (_) => MusicPlayerBloc(songs, initialIndex)),
           ],
-        
           child: MaterialApp(
             title: 'Musically',
             theme: Provider.of<ThemeProvider>(context).themeData,
