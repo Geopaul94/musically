@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "994914626825",
+    "project_id": "musically-d0a36",
+    "storage_bucket": "musically-d0a36.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994914626825:android:1088ae09f40c67e1e3b7d8",
+        "android_client_info": {
+          "package_name": "com.example.musically"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994914626825-8147if8cfu586cufa50lof6be3r7fuqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.musically",
+            "certificate_hash": "df9554f75a9524f90a440b6332d29c0aabb0a49f"
+          }
+        },
+        {
+          "client_id": "994914626825-ios8sfla4mlk8f1r73012lcikmugkism.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq-8PNRQdI4SQigaA4Qac7du8tACQsHAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994914626825-ios8sfla4mlk8f1r73012lcikmugkism.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "994914626825-mo1le65ujp5816mp8l794qtk6phd5j34.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.musically"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
